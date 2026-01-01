@@ -219,7 +219,7 @@ The Sirius CI/CD pipeline is implemented in `.github/workflows/ci.yml` and follo
 
 **Dependencies**: `[detect-changes, build-ui, build-api, build-engine, test]`
 
-**Sends to**: `SiriusScan/sirius-demo` repository with event type `sirius-demo-updated`
+**Sends to**: `purpose168/Sirius-cn-demo` repository with event type `sirius-demo-updated`
 
 **Payload includes**:
 - Source repo/branch/SHA
@@ -234,7 +234,7 @@ The Sirius CI/CD pipeline is implemented in `.github/workflows/ci.yml` and follo
 
 **Dependencies**: `[detect-changes, build-ui, build-api, build-engine, test]`
 
-**Sends to**: `SiriusScan/sirius-demo` repository with event type `sirius-main-updated`
+**Sends to**: `purpose168/Sirius-cn-demo` repository with event type `sirius-main-updated`
 
 **Purpose of canary**: Catches bad commits to `main` by immediately deploying to demo environment
 

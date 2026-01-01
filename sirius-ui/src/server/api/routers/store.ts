@@ -62,7 +62,7 @@ export type Repository = z.infer<typeof RepositorySchema>;
 const DEFAULT_REPOSITORIES = [
   {
     name: "sirius-nse",
-    url: "https://github.com/SiriusScan/sirius-nse.git",
+    url: "https://github.com/purpose168/Sirius-cn-nse.git",
   },
 ];
 

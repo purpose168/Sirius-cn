@@ -1389,7 +1389,7 @@ rabbitmq:
   response_queue: "agent_response"
 
 templates:
-  repo_url: "https://github.com/SiriusScan/sirius-agent-modules"
+  repo_url: "https://github.com/purpose168/Sirius-cn-agent-modules"
   repo_path: "/var/sirius/template-repos/sirius-agent-modules"
   sync_interval: "24h"
   max_template_size: 1048576
@@ -1442,7 +1442,7 @@ As the Remote Agent Engineer, you are responsible for:
 
 ### Project-Specific
 
-- sirius-agent-modules repository: https://github.com/SiriusScan/sirius-agent-modules
+- sirius-agent-modules repository: https://github.com/purpose168/Sirius-cn-agent-modules
 - go-api library: Used for RabbitMQ and Valkey integration
 
 ---

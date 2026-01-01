@@ -8,7 +8,7 @@ alwaysApply: true
 
 ## Repository Information
 
-- **Repository**: https://github.com/SiriusScan/Sirius
+- **Repository**: https://github.com/purpose168/Sirius-cn
 - **Owner**: SiriusScan
 - **Repository Name**: Sirius
 
@@ -188,7 +188,7 @@ Hi @declan727! I can see the issue you're experiencing. The problem is with the 
 **Root Cause**: The README tells users to clone the website.git repository, but the docker-compose.yaml expects local directories.
 
 **Solution**:
-1. Clone the correct repository: `git clone https://github.com/SiriusScan/Sirius.git`
+1. Clone the correct repository: `git clone https://github.com/purpose168/Sirius-cn.git`
 2. Navigate to the directory: `cd Sirius`
 3. Run: `docker compose up -d`
 

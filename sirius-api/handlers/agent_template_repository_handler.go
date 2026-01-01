@@ -112,7 +112,7 @@ func initializeDefaultRepository(ctx context.Context, kvStore store.KVStore) err
 	defaultRepo := AgentTemplateRepository{
 		ID:            "default-sirius-official",
 		Name:          "Sirius Official",
-		URL:           "https://github.com/SiriusScan/sirius-agent-modules",
+		URL:           "https://github.com/purpose168/Sirius-cn-agent-modules",
 		Branch:        "main",
 		Priority:      1,
 		Enabled:       true,

@@ -58,7 +58,7 @@ This guide provides comprehensive instructions for deploying Sirius to AWS using
 
 ```bash
 # Clone the repository
-git clone https://github.com/SiriusScan/Sirius.git
+git clone https://github.com/purpose168/Sirius-cn.git
 cd Sirius
 
 # Create infrastructure directory
@@ -292,7 +292,7 @@ variable "ssh_cidrs" {
 variable "sirius_repo_url" {
   description = "Sirius repository URL"
   type        = string
-  default     = "https://github.com/SiriusScan/Sirius.git"
+  default     = "https://github.com/purpose168/Sirius-cn.git"
 }
 
 variable "sirius_branch" {
@@ -529,7 +529,7 @@ allowed_cidrs = ["0.0.0.0/0"]  # Restrict for production
 ssh_cidrs     = ["0.0.0.0/0"]  # Restrict for production
 
 # Repository Configuration
-sirius_repo_url = "https://github.com/SiriusScan/Sirius.git"
+sirius_repo_url = "https://github.com/purpose168/Sirius-cn.git"
 sirius_branch   = "main"
 environment     = "dev"
 
@@ -544,7 +544,7 @@ common_tags = {
 
 ## Container Registry Deployment
 
-Sirius now uses prebuilt container images from GitHub Container Registry (GHCR) by default, providing **60-75% faster deployments** (5-8 minutes vs 20-25 minutes). The base `docker-compose.yaml` automatically pulls images from `ghcr.io/siriusscan/sirius-{ui,api,engine}:{tag}`.
+Sirius now uses prebuilt container images from GitHub Container Registry (GHCR) by default, providing **60-75% faster deployments** (5-8 minutes vs 20-25 minutes). The base `docker-compose.yaml` automatically pulls images from `ghcr.io/purpose168/Sirius-cn-{ui,api,engine}:{tag}`.
 
 ### Image Tagging
 

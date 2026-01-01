@@ -59,7 +59,7 @@ RUN git clone https://github.com/SiriusScan/app-agent.git && \
     CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o server cmd/server/main.go
 
 # Clone sirius-nse
-RUN git clone https://github.com/SiriusScan/sirius-nse.git && \
+RUN git clone https://github.com/purpose168/Sirius-cn-nse.git && \
     cd sirius-nse && \
     git checkout ${SIRIUS_NSE_COMMIT_SHA}
 

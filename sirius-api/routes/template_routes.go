@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/SiriusScan/sirius-api/handlers"
+	"github.com/purpose168/Sirius-cn-api/handlers"
 	"github.com/gofiber/fiber/v2"
 )
 

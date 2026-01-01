@@ -35,7 +35,7 @@ This guide provides comprehensive instructions for developers working on Sirius 
 
 ```bash
 # Clone and start
-git clone https://github.com/SiriusScan/Sirius.git
+git clone https://github.com/purpose168/Sirius-cn.git
 cd Sirius
 
 # Use simplified configuration
@@ -58,7 +58,7 @@ open http://localhost:3000
 
 ```bash
 # Clone and start
-git clone https://github.com/SiriusScan/Sirius.git
+git clone https://github.com/purpose168/Sirius-cn.git
 cd Sirius
 
 # Standard development start

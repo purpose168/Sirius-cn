@@ -1,222 +1,264 @@
-# SiriusScan Base Docker Compose Configuration
-# This is the base configuration that works for most environments
-# Use with: docker compose up -d
+# SiriusScan 基础 Docker Compose 配置
+# 这是适用于大多数环境的基础配置
+# 使用方法: docker compose up -d
 
+# 项目名称
 name: sirius
 
+# 服务定义
 services:
+  # RabbitMQ 消息队列服务
   sirius-rabbitmq:
+    # 构建配置
     build:
-      context: ./sirius-rabbitmq
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    container_name: sirius-rabbitmq
-    hostname: sirius-rabbitmq
+      context: ./sirius-rabbitmq  # 构建上下文目录
+      dockerfile: Dockerfile      # Dockerfile 路径
+    restart: unless-stopped       # 重启策略: 除非手动停止，否则自动重启
+    container_name: sirius-rabbitmq  # 容器名称
+    hostname: sirius-rabbitmq     # 容器主机名
+    # 环境变量
     environment:
-      VALKEY_HOST: ${VALKEY_HOST:-sirius-valkey}
-      VALKEY_PORT: ${VALKEY_PORT:-6379}
+      VALKEY_HOST: ${VALKEY_HOST:-sirius-valkey}  # Valkey 主机名 (默认: sirius-valkey)
+      VALKEY_PORT: ${VALKEY_PORT:-6379}           # Valkey 端口号 (默认: 6379)
+    # 端口映射 (主机端口:容器端口)
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5672:5672"   # RabbitMQ 主端口
+      - "15672:15672" # RabbitMQ 管理界面端口
+    # 卷挂载
     volumes:
-      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
-      - rabbitmq_data:/var/lib/rabbitmq
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro  # RabbitMQ 配置文件 (只读)
+      - rabbitmq_data:/var/lib/rabbitmq  # RabbitMQ 数据持久化卷
+    # 健康检查配置
     healthcheck:
-      test: ["CMD", "rabbitmqctl", "status"]
-      interval: 30s
-      timeout: 15s
-      retries: 5
+      test: ["CMD", "rabbitmqctl", "status"]  # 健康检查命令
+      interval: 30s  # 检查间隔
+      timeout: 15s   # 检查超时时间
+      retries: 5     # 最大重试次数
+    # 资源限制配置
     deploy:
       resources:
-        limits:
-          memory: 512M
-          cpus: "0.5"
-        reservations:
-          memory: 256M
-          cpus: "0.25"
+        limits:          # 资源上限
+          memory: 512M   # 最大内存
+          cpus: "0.5"     # 最大 CPU 核心数
+        reservations:    # 资源预留
+          memory: 256M   # 预留内存
+          cpus: "0.25"    # 预留 CPU 核心数
 
+  # PostgreSQL 数据库服务
   sirius-postgres:
+    # 构建配置
     build:
-      context: ./sirius-postgres
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    container_name: sirius-postgres
-    hostname: sirius-postgres
+      context: ./sirius-postgres  # 构建上下文目录
+      dockerfile: Dockerfile      # Dockerfile 路径
+    restart: unless-stopped       # 重启策略: 除非手动停止，否则自动重启
+    container_name: sirius-postgres  # 容器名称
+    hostname: sirius-postgres     # 容器主机名
+    # 环境变量
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-sirius}
-      VALKEY_HOST: ${VALKEY_HOST:-sirius-valkey}
-      VALKEY_PORT: ${VALKEY_PORT:-6379}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}  # PostgreSQL 用户名 (默认: postgres)
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}  # PostgreSQL 密码 (默认: postgres)
+      POSTGRES_DB: ${POSTGRES_DB:-sirius}  # PostgreSQL 数据库名 (默认: sirius)
+      VALKEY_HOST: ${VALKEY_HOST:-sirius-valkey}  # Valkey 主机名 (默认: sirius-valkey)
+      VALKEY_PORT: ${VALKEY_PORT:-6379}           # Valkey 端口号 (默认: 6379)
+    # 端口映射
     ports:
-      - "5432:5432"
+      - "5432:5432"  # PostgreSQL 端口
+    # 卷挂载
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data  # PostgreSQL 数据持久化卷
+    # 健康检查配置
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "pg_isready -U postgres"]  # 健康检查命令
+      interval: 10s  # 检查间隔
+      timeout: 5s    # 检查超时时间
+      retries: 5     # 最大重试次数
+    # 资源限制配置
     deploy:
       resources:
-        limits:
-          memory: 1G
-          cpus: "0.5"
-        reservations:
-          memory: 512M
-          cpus: "0.25"
+        limits:          # 资源上限
+          memory: 1G     # 最大内存
+          cpus: "0.5"     # 最大 CPU 核心数
+        reservations:    # 资源预留
+          memory: 512M   # 预留内存
+          cpus: "0.25"    # 预留 CPU 核心数
 
+  # Valkey 缓存服务 (Redis 替代方案)
   sirius-valkey:
+    # 构建配置
     build:
-      context: ./sirius-valkey
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    container_name: sirius-valkey
-    hostname: sirius-valkey
+      context: ./sirius-valkey   # 构建上下文目录
+      dockerfile: Dockerfile     # Dockerfile 路径
+    restart: unless-stopped      # 重启策略: 除非手动停止，否则自动重启
+    container_name: sirius-valkey  # 容器名称
+    hostname: sirius-valkey      # 容器主机名
+    # 环境变量
     environment:
-      VALKEY_HOST: ${VALKEY_HOST:-sirius-valkey}
-      VALKEY_PORT: ${VALKEY_PORT:-6379}
+      VALKEY_HOST: ${VALKEY_HOST:-sirius-valkey}  # Valkey 主机名 (默认: sirius-valkey)
+      VALKEY_PORT: ${VALKEY_PORT:-6379}           # Valkey 端口号 (默认: 6379)
+    # 端口映射
     ports:
-      - "6379:6379"
+      - "6379:6379"  # Valkey 端口
+    # 卷挂载
     volumes:
-      - valkey_data:/data
+      - valkey_data:/data  # Valkey 数据持久化卷
+    # 资源限制配置
     deploy:
       resources:
-        limits:
-          memory: 256M
-          cpus: "0.25"
-        reservations:
-          memory: 128M
-          cpus: "0.1"
+        limits:          # 资源上限
+          memory: 256M   # 最大内存
+          cpus: "0.25"    # 最大 CPU 核心数
+        reservations:    # 资源预留
+          memory: 128M   # 预留内存
+          cpus: "0.1"     # 预留 CPU 核心数
 
+  # UI 前端服务
   sirius-ui:
-    image: ghcr.io/siriusscan/sirius-ui:${IMAGE_TAG:-latest}
-    pull_policy: always
-    container_name: sirius-ui
-    hostname: sirius-ui
-    restart: unless-stopped
+    image: ghcr.io/purpose168/Sirius-cn-ui:${IMAGE_TAG:-latest}  # 镜像来源
+    pull_policy: always  # 拉取策略: 总是拉取最新镜像
+    container_name: sirius-ui  # 容器名称
+    hostname: sirius-ui   # 容器主机名
+    restart: unless-stopped  # 重启策略: 除非手动停止，否则自动重启
+    # 端口映射
     ports:
-      - "3000:3000"
+      - "3000:3000"  # UI 服务端口
+    # 环境变量
     environment:
-      - NODE_ENV=${NODE_ENV:-production}
-      - SKIP_ENV_VALIDATION=${SKIP_ENV_VALIDATION:-1}
-      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@sirius-postgres:5432/sirius}
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-change-this-secret-in-production-please}
-      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}
-      - SIRIUS_API_URL=${SIRIUS_API_URL:-http://sirius-api:9001}
-      - NEXT_PUBLIC_SIRIUS_API_URL=${NEXT_PUBLIC_SIRIUS_API_URL:-http://localhost:9001}
-      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID:-dummy_client_id}
-      - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET:-dummy_client_secret}
+      - NODE_ENV=${NODE_ENV:-production}  # Node.js 环境 (默认: production)
+      - SKIP_ENV_VALIDATION=${SKIP_ENV_VALIDATION:-1}  # 是否跳过环境变量验证 (默认: 1)
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@sirius-postgres:5432/sirius}  # 数据库连接 URL
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-change-this-secret-in-production-please}  # NextAuth 密钥 (生产环境请修改)
+      - NEXTAUTH_URL=${NEXTAUTH_URL:-http://localhost:3000}  # NextAuth URL
+      - SIRIUS_API_URL=${SIRIUS_API_URL:-http://sirius-api:9001}  # API 服务内部访问 URL
+      - NEXT_PUBLIC_SIRIUS_API_URL=${NEXT_PUBLIC_SIRIUS_API_URL:-http://localhost:9001}  # API 服务外部访问 URL
+      - DISCORD_CLIENT_ID=${DISCORD_CLIENT_ID:-dummy_client_id}  # Discord 客户端 ID
+      - DISCORD_CLIENT_SECRET=${DISCORD_CLIENT_SECRET:-dummy_client_secret}  # Discord 客户端密钥
+    # 服务依赖关系
     depends_on:
       sirius-postgres:
-        condition: service_healthy
+        condition: service_healthy  # 依赖于 PostgreSQL 服务健康状态
+    # 健康检查配置
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]  # 健康检查命令
+      interval: 30s  # 检查间隔
+      timeout: 10s   # 检查超时时间
+      retries: 3     # 最大重试次数
+    # 资源限制配置
     deploy:
       resources:
-        limits:
-          memory: 1G
-          cpus: "0.5"
-        reservations:
-          memory: 512M
-          cpus: "0.25"
+        limits:          # 资源上限
+          memory: 1G     # 最大内存
+          cpus: "0.5"     # 最大 CPU 核心数
+        reservations:    # 资源预留
+          memory: 512M   # 预留内存
+          cpus: "0.25"    # 预留 CPU 核心数
 
+  # API 后端服务
   sirius-api:
-    image: ghcr.io/siriusscan/sirius-api:${IMAGE_TAG:-latest}
-    pull_policy: always
-    container_name: sirius-api
-    hostname: sirius-api
-    restart: unless-stopped
+    image: ghcr.io/purpose168/Sirius-cn-api:${IMAGE_TAG:-latest}  # 镜像来源
+    pull_policy: always  # 拉取策略: 总是拉取最新镜像
+    container_name: sirius-api  # 容器名称
+    hostname: sirius-api   # 容器主机名
+    restart: unless-stopped  # 重启策略: 除非手动停止，否则自动重启
+    # 端口映射
     ports:
-      - "9001:9001"
+      - "9001:9001"  # API 服务端口
+    # 环境变量
     environment:
-      - GO_ENV=${GO_ENV:-production}
-      - API_PORT=${API_PORT:-9001}
-      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-*}
-      - POSTGRES_HOST=${POSTGRES_HOST:-sirius-postgres}
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - POSTGRES_DB=${POSTGRES_DB:-sirius}
-      - POSTGRES_PORT=${POSTGRES_PORT:-5432}
-      - VALKEY_HOST=${VALKEY_HOST:-sirius-valkey}
-      - VALKEY_PORT=${VALKEY_PORT:-6379}
-      - RABBITMQ_URL=${RABBITMQ_URL:-amqp://guest:guest@sirius-rabbitmq:5672/}
-      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - GO_ENV=${GO_ENV:-production}  # Go 环境 (默认: production)
+      - API_PORT=${API_PORT:-9001}  # API 服务端口
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-*}  # 允许的 CORS 源 (默认: 所有)
+      - POSTGRES_HOST=${POSTGRES_HOST:-sirius-postgres}  # PostgreSQL 主机名
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}  # PostgreSQL 用户名
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}  # PostgreSQL 密码
+      - POSTGRES_DB=${POSTGRES_DB:-sirius}  # PostgreSQL 数据库名
+      - POSTGRES_PORT=${POSTGRES_PORT:-5432}  # PostgreSQL 端口
+      - VALKEY_HOST=${VALKEY_HOST:-sirius-valkey}  # Valkey 主机名
+      - VALKEY_PORT=${VALKEY_PORT:-6379}  # Valkey 端口
+      - RABBITMQ_URL=${RABBITMQ_URL:-amqp://guest:guest@sirius-rabbitmq:5672/}  # RabbitMQ 连接 URL
+      - LOG_LEVEL=${LOG_LEVEL:-info}  # 日志级别 (默认: info)
+    # 资源限制配置
     deploy:
       resources:
-        limits:
-          memory: 2G
-          cpus: "1.0"
-        reservations:
-          memory: 1G
-          cpus: "0.5"
+        limits:          # 资源上限
+          memory: 2G     # 最大内存
+          cpus: "1.0"     # 最大 CPU 核心数
+        reservations:    # 资源预留
+          memory: 1G     # 预留内存
+          cpus: "0.5"     # 预留 CPU 核心数
+    # 服务依赖关系
     depends_on:
       sirius-postgres:
-        condition: service_healthy
+        condition: service_healthy  # 依赖于 PostgreSQL 服务健康状态
       sirius-rabbitmq:
-        condition: service_healthy
+        condition: service_healthy  # 依赖于 RabbitMQ 服务健康状态
+    # 健康检查配置
     healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:9001/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:9001/health"]  # 健康检查命令
+      interval: 30s  # 检查间隔
+      timeout: 10s   # 检查超时时间
+      retries: 3     # 最大重试次数
 
+  # 引擎服务
   sirius-engine:
-    image: ghcr.io/siriusscan/sirius-engine:${IMAGE_TAG:-latest}
-    pull_policy: always
-    container_name: sirius-engine
-    hostname: sirius-engine
-    restart: unless-stopped
+    image: ghcr.io/purpose168/Sirius-cn-engine:${IMAGE_TAG:-latest}  # 镜像来源
+    pull_policy: always  # 拉取策略: 总是拉取最新镜像
+    container_name: sirius-engine  # 容器名称
+    hostname: sirius-engine   # 容器主机名
+    restart: unless-stopped  # 重启策略: 除非手动停止，否则自动重启
+    # 端口映射
     ports:
-      - "5174:5174"
-      - "50051:50051" # Agent gRPC
+      - "5174:5174"  # 引擎主端口
+      - "50051:50051" # Agent gRPC 端口
+    # 环境变量
     environment:
-      - GO_ENV=${GO_ENV:-production}
-      - ENGINE_MAIN_PORT=${ENGINE_MAIN_PORT:-5174}
-      - GRPC_AGENT_PORT=${GRPC_AGENT_PORT:-50051}
-      - POSTGRES_HOST=${POSTGRES_HOST:-sirius-postgres}
-      - POSTGRES_USER=${POSTGRES_USER:-postgres}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - POSTGRES_DB=${POSTGRES_DB:-sirius}
-      - POSTGRES_PORT=${POSTGRES_PORT:-5432}
-      - VALKEY_HOST=${VALKEY_HOST:-sirius-valkey}
-      - VALKEY_PORT=${VALKEY_PORT:-6379}
-      - RABBITMQ_URL=${RABBITMQ_URL:-amqp://guest:guest@sirius-rabbitmq:5672/}
-      - SIRIUS_API_URL=${SIRIUS_API_URL:-http://sirius-api:9001}
-      - API_BASE_URL=${API_BASE_URL:-http://sirius-api:9001}
-      - AGENT_ID=${AGENT_ID:-sirius-engine}
-      - HOST_ID=${HOST_ID:-sirius-engine}
-      - ENABLE_SCRIPTING=${ENABLE_SCRIPTING:-true}
-      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - GO_ENV=${GO_ENV:-production}  # Go 环境 (默认: production)
+      - ENGINE_MAIN_PORT=${ENGINE_MAIN_PORT:-5174}  # 引擎主端口
+      - GRPC_AGENT_PORT=${GRPC_AGENT_PORT:-50051}  # Agent gRPC 端口
+      - POSTGRES_HOST=${POSTGRES_HOST:-sirius-postgres}  # PostgreSQL 主机名
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}  # PostgreSQL 用户名
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}  # PostgreSQL 密码
+      - POSTGRES_DB=${POSTGRES_DB:-sirius}  # PostgreSQL 数据库名
+      - POSTGRES_PORT=${POSTGRES_PORT:-5432}  # PostgreSQL 端口
+      - VALKEY_HOST=${VALKEY_HOST:-sirius-valkey}  # Valkey 主机名
+      - VALKEY_PORT=${VALKEY_PORT:-6379}  # Valkey 端口
+      - RABBITMQ_URL=${RABBITMQ_URL:-amqp://guest:guest@sirius-rabbitmq:5672/}  # RabbitMQ 连接 URL
+      - SIRIUS_API_URL=${SIRIUS_API_URL:-http://sirius-api:9001}  # API 服务 URL
+      - API_BASE_URL=${API_BASE_URL:-http://sirius-api:9001}  # API 基础 URL
+      - AGENT_ID=${AGENT_ID:-sirius-engine}  # Agent ID
+      - HOST_ID=${HOST_ID:-sirius-engine}  # 主机 ID
+      - ENABLE_SCRIPTING=${ENABLE_SCRIPTING:-true}  # 是否启用脚本支持 (默认: true)
+      - LOG_LEVEL=${LOG_LEVEL:-info}  # 日志级别 (默认: info)
+    # 服务依赖关系
     depends_on:
       sirius-rabbitmq:
-        condition: service_healthy
+        condition: service_healthy  # 依赖于 RabbitMQ 服务健康状态
+    # 健康检查配置
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5174/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      test: ["CMD", "curl", "-f", "http://localhost:5174/health"]  # 健康检查命令
+      interval: 30s  # 检查间隔
+      timeout: 10s   # 检查超时时间
+      retries: 3     # 最大重试次数
+    # 资源限制配置
     deploy:
       resources:
-        limits:
-          memory: 2G
-          cpus: "1.0"
-        reservations:
-          memory: 1G
-          cpus: "0.5"
+        limits:          # 资源上限
+          memory: 2G     # 最大内存
+          cpus: "1.0"     # 最大 CPU 核心数
+        reservations:    # 资源预留
+          memory: 1G     # 预留内存
+          cpus: "0.5"     # 预留 CPU 核心数
 
+# 卷定义 (用于数据持久化)
 volumes:
-  postgres_data:
-    driver: local
-  valkey_data:
-    driver: local
-  rabbitmq_data:
-    driver: local
+  postgres_data:      # PostgreSQL 数据卷
+    driver: local     # 使用本地卷驱动
+  valkey_data:        # Valkey 数据卷
+    driver: local     # 使用本地卷驱动
+  rabbitmq_data:      # RabbitMQ 数据卷
+    driver: local     # 使用本地卷驱动
 
+# 网络定义
 networks:
-  default:
-    name: sirius
-    driver: bridge
+  default:            # 默认网络
+    name: sirius      # 网络名称
+    driver: bridge    # 使用桥接网络驱动

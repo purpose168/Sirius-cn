@@ -357,7 +357,7 @@ The scanner maintains a curated collection of NSE scripts via the `sirius-nse` r
 
 **Purpose:** Git-based synchronization of NSE scripts.
 
-**Repository URL:** `https://github.com/SiriusScan/sirius-nse.git`
+**Repository URL:** `https://github.com/purpose168/Sirius-cn-nse.git`
 
 **Local Path:** `/opt/sirius/nse/sirius-nse` (in Docker container)
 
@@ -1449,7 +1449,7 @@ GO_ENV=development  # Enable dev mode
   "repositories": [
     {
       "name": "sirius-nse",
-      "url": "https://github.com/SiriusScan/sirius-nse.git"
+      "url": "https://github.com/purpose168/Sirius-cn-nse.git"
     }
   ]
 }

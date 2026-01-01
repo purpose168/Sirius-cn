@@ -1,4 +1,4 @@
-module github.com/SiriusScan/sirius-api
+module github.com/purpose168/Sirius-cn-api
 
 go 1.24.0
 

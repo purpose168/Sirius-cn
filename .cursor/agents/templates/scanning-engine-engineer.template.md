@@ -987,7 +987,7 @@ Scanner → API (REST) → PostgreSQL
 
 **Synchronization:**
 
-- Repository: `https://github.com/SiriusScan/sirius-nse.git`
+- Repository: `https://github.com/purpose168/Sirius-cn-nse.git`
 - Local Path: `/opt/sirius/nse/sirius-nse`
 - Sync Timing: Startup, pre-scan (with cooldown)
 - Operation: `git fetch && git reset --hard origin/main`

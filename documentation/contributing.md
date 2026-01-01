@@ -71,7 +71,7 @@ Sirius uses a microservices architecture with the following key components:
 ### Step 1: Clone the Main Repository
 
 ```bash
-git clone https://github.com/SiriusScan/Sirius.git
+git clone https://github.com/purpose168/Sirius-cn.git
 cd Sirius
 ```
 
@@ -88,7 +88,7 @@ git clone https://github.com/SiriusScan/go-api.git          # REST API backend
 git clone https://github.com/SiriusScan/app-scanner.git    # Scanning engine
 git clone https://github.com/SiriusScan/app-terminal.git   # Terminal service
 git clone https://github.com/SiriusScan/app-agent.git      # Remote agents
-git clone https://github.com/SiriusScan/sirius-nse.git     # NSE scripts
+git clone https://github.com/purpose168/Sirius-cn-nse.git     # NSE scripts
 git clone https://github.com/SiriusScan/app-system-monitor.git  # System monitor
 git clone https://github.com/SiriusScan/app-administrator.git   # Administrator service
 
@@ -416,7 +416,7 @@ We welcome contributions in:
 - [app-scanner](https://github.com/SiriusScan/app-scanner) - Scanning engine
 - [app-terminal](https://github.com/SiriusScan/app-terminal) - Terminal service
 - [app-agent](https://github.com/SiriusScan/app-agent) - Remote agents
-- [sirius-nse](https://github.com/SiriusScan/sirius-nse) - NSE scripts
+- [sirius-nse](https://github.com/purpose168/Sirius-cn-nse) - NSE scripts
 - [app-system-monitor](https://github.com/SiriusScan/app-system-monitor) - System monitor
 - [app-administrator](https://github.com/SiriusScan/app-administrator) - Admin service
 

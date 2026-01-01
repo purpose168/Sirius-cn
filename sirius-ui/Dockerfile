@@ -27,7 +27,7 @@ RUN sed -i 's/bunx prisma generate/npx prisma generate/g' package.json && \
 # This ensures scripts are available in both dev and production environments
 ARG SIRIUS_NSE_COMMIT_SHA=main
 RUN mkdir -p /sirius-nse && \
-    git clone https://github.com/SiriusScan/sirius-nse.git /sirius-nse && \
+    git clone https://github.com/purpose168/Sirius-cn-nse.git /sirius-nse && \
     cd /sirius-nse && \
     git checkout ${SIRIUS_NSE_COMMIT_SHA} && \
     echo "✅ Cloned sirius-nse repository ($(git rev-parse --short HEAD))"

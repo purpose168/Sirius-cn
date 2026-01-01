@@ -74,7 +74,7 @@ docker compose -f docker-compose.yaml -f docker-compose.production.yaml --env-fi
    version: "3.8"
    services:
      sirius-ui:
-       image: ghcr.io/siriusscan/sirius-ui:${IMAGE_TAG:-latest}
+       image: ghcr.io/purpose168/Sirius-cn-ui:${IMAGE_TAG:-latest}
        build: null # Disable build, use pre-built images
        volumes: [] # Remove development volume mounts
        environment:
@@ -82,12 +82,12 @@ docker compose -f docker-compose.yaml -f docker-compose.production.yaml --env-fi
          - SKIP_ENV_VALIDATION=0
 
      sirius-api:
-       image: ghcr.io/siriusscan/sirius-api:${IMAGE_TAG:-latest}
+       image: ghcr.io/purpose168/Sirius-cn-api:${IMAGE_TAG:-latest}
        build: null
        volumes: []
 
      sirius-engine:
-       image: ghcr.io/siriusscan/sirius-engine:${IMAGE_TAG:-latest}
+       image: ghcr.io/purpose168/Sirius-cn-engine:${IMAGE_TAG:-latest}
        build: null
        volumes: []
    ```

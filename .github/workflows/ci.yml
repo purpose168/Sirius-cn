@@ -499,7 +499,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: SiriusScan/sirius-demo
+          repository: purpose168/Sirius-cn-demo
           event-type: sirius-demo-updated
           client-payload: |
             {
@@ -523,7 +523,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: SiriusScan/sirius-demo
+          repository: purpose168/Sirius-cn-demo
           event-type: sirius-main-updated
           client-payload: |
             {

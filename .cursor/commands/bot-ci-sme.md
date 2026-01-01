@@ -286,13 +286,13 @@ As CI/CD SME, you have **high system integration** - comprehensive understanding
 
 **6. dispatch-demo-deployment**
 - Triggers on push to `sirius-demo` branch after successful builds/tests
-- Sends `repository_dispatch` event to `SiriusScan/sirius-demo`
+- Sends `repository_dispatch` event to `purpose168/Sirius-cn-demo`
 - Event type: `sirius-demo-updated`
 - Includes source repo/branch/SHA, actor, commit message
 
 **7. dispatch-demo-canary**
 - Triggers on push to `main` branch after successful builds/tests
-- Sends `repository_dispatch` event to `SiriusScan/sirius-demo`
+- Sends `repository_dispatch` event to `purpose168/Sirius-cn-demo`
 - Event type: `sirius-main-updated`
 - **Canary purpose**: Catches bad commits to main by immediately deploying to demo
 
@@ -320,9 +320,9 @@ As CI/CD SME, you have **high system integration** - comprehensive understanding
 **Registry URL**: `ghcr.io/siriusscan/`
 
 **Images:**
-- `ghcr.io/siriusscan/sirius-ui:{tag}`
-- `ghcr.io/siriusscan/sirius-api:{tag}`
-- `ghcr.io/siriusscan/sirius-engine:{tag}`
+- `ghcr.io/purpose168/Sirius-cn-ui:{tag}`
+- `ghcr.io/purpose168/Sirius-cn-api:{tag}`
+- `ghcr.io/purpose168/Sirius-cn-engine:{tag}`
 
 **Visibility**: Public (no authentication required for pulls)
 
@@ -381,7 +381,7 @@ else:
 # docker-compose.yaml
 services:
   sirius-ui:
-    image: ghcr.io/siriusscan/sirius-ui:${IMAGE_TAG:-latest}
+    image: ghcr.io/purpose168/Sirius-cn-ui:${IMAGE_TAG:-latest}
     pull_policy: always
 ```
 
@@ -433,7 +433,7 @@ build-ui:
         context: ./sirius-ui
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ghcr.io/siriusscan/sirius-ui:${{ steps.meta.outputs.image_tag }}
+        tags: ghcr.io/purpose168/Sirius-cn-ui:${{ steps.meta.outputs.image_tag }}
 ```
 
 **Why this works:**
@@ -525,8 +525,8 @@ test:
     platforms: linux/amd64,linux/arm64
     push: true
     tags: |
-      ghcr.io/siriusscan/sirius-ui:${{ steps.meta.outputs.image_tag }}
-      ${{ steps.meta.outputs.also_tag_beta == 'true' && 'ghcr.io/siriusscan/sirius-ui:beta' || '' }}
+      ghcr.io/purpose168/Sirius-cn-ui:${{ steps.meta.outputs.image_tag }}
+      ${{ steps.meta.outputs.also_tag_beta == 'true' && 'ghcr.io/purpose168/Sirius-cn-ui:beta' || '' }}
     cache-from: type=gha
     cache-to: type=gha,mode=max
 ```
@@ -818,9 +818,9 @@ git push origin v0.4.2
 gh run watch --interval 30
 
 # 3. Verify images exist
-docker pull ghcr.io/siriusscan/sirius-ui:v0.4.2
-docker pull ghcr.io/siriusscan/sirius-api:v0.4.2
-docker pull ghcr.io/siriusscan/sirius-engine:v0.4.2
+docker pull ghcr.io/purpose168/Sirius-cn-ui:v0.4.2
+docker pull ghcr.io/purpose168/Sirius-cn-api:v0.4.2
+docker pull ghcr.io/purpose168/Sirius-cn-engine:v0.4.2
 
 # 4. Deploy with specific version
 IMAGE_TAG=v0.4.2 docker compose pull
@@ -900,7 +900,7 @@ gh secret list
 
 # 3. Test local authentication
 echo "$PAT" | docker login ghcr.io -u USERNAME --password-stdin
-docker pull ghcr.io/siriusscan/sirius-ui:latest
+docker pull ghcr.io/purpose168/Sirius-cn-ui:latest
 
 # 4. Regenerate secrets if needed
 # Create new PAT, update GHCR_PUSH_TOKEN secret
@@ -936,7 +936,7 @@ gh run view <run-id> --log | grep "image_tag="
 
 # 3. Check images exist in GHCR
 curl -H "Authorization: Bearer $TOKEN" \
-  https://ghcr.io/v2/siriusscan/sirius-ui/tags/list
+  https://ghcr.io/v2/purpose168/Sirius-cn-ui/tags/list
 
 # 4. Verify test job authentication
 # Should have docker login step with GHCR_PUSH credentials
@@ -1080,7 +1080,7 @@ git push origin main                  # Auto-trigger
 gh workflow run ci.yml --ref main     # Manual trigger
 
 # Container registry
-docker pull ghcr.io/siriusscan/sirius-ui:latest
+docker pull ghcr.io/purpose168/Sirius-cn-ui:latest
 IMAGE_TAG=v0.4.1 docker compose pull
 docker login ghcr.io -u USERNAME
 

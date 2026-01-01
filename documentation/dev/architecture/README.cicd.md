@@ -199,7 +199,7 @@ if changes in docker-compose*.yaml → build all services
 
 **Namespace**: siriusscan
 
-**Image Naming**: `ghcr.io/siriusscan/sirius-{service}:{tag}`
+**Image Naming**: `ghcr.io/purpose168/Sirius-cn-{service}:{tag}`
 
 ## Workflow Jobs
 

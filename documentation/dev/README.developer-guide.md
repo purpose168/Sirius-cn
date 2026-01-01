@@ -40,7 +40,7 @@ This guide provides everything you need to know to develop effectively on the Si
 
 ```bash
 # Clone the repository
-git clone https://github.com/SiriusScan/Sirius.git
+git clone https://github.com/purpose168/Sirius-cn.git
 cd Sirius
 
 # Start development environment

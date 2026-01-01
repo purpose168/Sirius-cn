@@ -6,7 +6,7 @@ The Repository Management System allows operators to manage multiple GitHub repo
 
 ## Current State
 
-**Backend:** Single hardcoded repository: `https://github.com/SiriusScan/sirius-agent-modules`
+**Backend:** Single hardcoded repository: `https://github.com/purpose168/Sirius-cn-agent-modules`
 **Frontend:** No repository management UI
 
 ## Requirements
@@ -24,7 +24,7 @@ The Repository Management System allows operators to manage multiple GitHub repo
     {
       "id": "uuid",
       "name": "Sirius Official",
-      "url": "https://github.com/SiriusScan/sirius-agent-modules",
+      "url": "https://github.com/purpose168/Sirius-cn-agent-modules",
       "branch": "main",
       "priority": 1,
       "enabled": true,
