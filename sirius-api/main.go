@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/SiriusScan/go-api/sirius/logging"
-	"github.com/purpose168/Sirius-cn-api/middleware"
-	"github.com/purpose168/Sirius-cn-api/routes"
+	"github.com/SiriusScan/sirius-api/middleware"
+	"github.com/SiriusScan/sirius-api/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"

@@ -221,7 +221,7 @@ const RepositoriesTab: React.FC = () => {
           </Label>
           <Input
             id="repoUrl"
-            placeholder="e.g., https://github.com/purpose168/Sirius-cn-nse.git"
+            placeholder="e.g., https://github.com/SiriusScan/sirius-nse.git"
             value={newRepoUrl}
             onChange={(e) => {
               setNewRepoUrl(e.target.value);

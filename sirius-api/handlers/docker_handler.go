@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/purpose168/Sirius-cn-api/services"
+	"github.com/SiriusScan/sirius-api/services"
 	"github.com/gofiber/fiber/v2"
 )
 

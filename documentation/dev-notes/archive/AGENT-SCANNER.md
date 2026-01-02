@@ -1807,7 +1807,7 @@ Setting up Sirius is designed to be straightforward, but understanding what each
 
 ```bash
 # Step 1: Get the code
-git clone https://github.com/purpose168/Sirius-cn.git
+git clone https://github.com/SiriusScan/Sirius.git
 cd Sirius
 
 # Step 2: Configure for local development

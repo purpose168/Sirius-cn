@@ -6,7 +6,7 @@ alwaysApply: false
 # GitHub MCP Usage Guidelines
 
 ## Repository Information
-- **Repository**: https://github.com/purpose168/Sirius-cn
+- **Repository**: https://github.com/SiriusScan/Sirius
 - **Owner**: SiriusScan
 - **Repository Name**: Sirius
 
@@ -133,7 +133,7 @@ I propose this comment for Issue #49:
 **Root Cause**: The README tells users to clone the website.git repository, but the docker-compose.yaml expects local directories.
 
 **Solution**: 
-1. Clone the correct repository: `git clone https://github.com/purpose168/Sirius-cn.git`
+1. Clone the correct repository: `git clone https://github.com/SiriusScan/Sirius.git`
 2. Navigate to the directory: `cd Sirius` 
 3. Run: `docker compose up -d`
 

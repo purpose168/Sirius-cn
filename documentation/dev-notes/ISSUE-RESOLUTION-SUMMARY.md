@@ -124,7 +124,7 @@ docker compose up -d --build
 
 This should resolve your build issue on Arch Linux. The fix applies to all platforms.
 
-**Reference**: See [CHANGELOG.md](https://github.com/purpose168/Sirius-cn/blob/main/CHANGELOG.md) - "Go Module Dependencies: Resolved version conflicts between sirius-api, go-api, and app-scanner modules"
+**Reference**: See [CHANGELOG.md](https://github.com/SiriusScan/Sirius/blob/main/CHANGELOG.md) - "Go Module Dependencies: Resolved version conflicts between sirius-api, go-api, and app-scanner modules"
 
 Closing this as resolved. If you continue to experience problems after updating, please feel free to reopen or create a new issue. Thanks again for the report!
 EOF

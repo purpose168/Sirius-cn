@@ -370,7 +370,7 @@ A: Update `app-scanner/internal/nse/manifest.json` or the `nse:repo-manifest` ke
 
    ```dockerfile
    # ❌ WRONG - Breaks dynamic management
-   RUN git clone https://github.com/purpose168/Sirius-cn-nse.git /sirius-nse
+   RUN git clone https://github.com/SiriusScan/sirius-nse.git /sirius-nse
    ```
 
 2. **Add volume mount for UI to read repositories**:

@@ -2,7 +2,7 @@
     "repositories": [
         {
             "name": "sirius-nse",
-            "url": "https://github.com/purpose168/Sirius-cn-nse.git"
+            "url": "https://github.com/SiriusScan/sirius-nse.git"
         }
     ]
 }

@@ -13,7 +13,7 @@ Sirius Scan is composed of a main `Sirius` repository and several submodule repo
   - Dependency installation.
   - Linting (e.g., `golangci-lint` for Go projects).
   - Unit testing.
-  - **Crucially**, upon a successful push/merge to its main branch, the submodule CI sends a `repository_dispatch` event to the main `purpose168/Sirius-cn` repository. This event signals that the submodule has been updated.
+  - **Crucially**, upon a successful push/merge to its main branch, the submodule CI sends a `repository_dispatch` event to the main `SiriusScan/Sirius` repository. This event signals that the submodule has been updated.
 
 - **Main `Sirius` Repository CI**: The primary CI/CD logic resides in `Sirius/.github/workflows/ci.yml`. This workflow orchestrates the build and integration of the entire application stack.
 

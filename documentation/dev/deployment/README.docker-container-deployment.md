@@ -54,7 +54,7 @@ This guide explains how to deploy Sirius using prebuilt container images from Gi
 
 ```bash
 # Clone repository
-git clone https://github.com/purpose168/Sirius-cn.git
+git clone https://github.com/SiriusScan/Sirius.git
 cd Sirius
 
 # Deploy with prebuilt images (default)
@@ -77,9 +77,9 @@ IMAGE_TAG=v0.4.1 docker compose up -d
 
 Sirius images are automatically built and pushed to GitHub Container Registry on every push to the main branch. Images are available at:
 
-- **UI**: `ghcr.io/purpose168/Sirius-cn-ui:{tag}`
-- **API**: `ghcr.io/purpose168/Sirius-cn-api:{tag}`
-- **Engine**: `ghcr.io/purpose168/Sirius-cn-engine:{tag}`
+- **UI**: `ghcr.io/siriusscan/sirius-ui:{tag}`
+- **API**: `ghcr.io/siriusscan/sirius-api:{tag}`
+- **Engine**: `ghcr.io/siriusscan/sirius-engine:{tag}`
 
 ### Image Tagging Strategy
 
@@ -108,17 +108,17 @@ The default `docker-compose.yaml` uses prebuilt images:
 ```yaml
 services:
   sirius-ui:
-    image: ghcr.io/purpose168/Sirius-cn-ui:${IMAGE_TAG:-latest}
+    image: ghcr.io/siriusscan/sirius-ui:${IMAGE_TAG:-latest}
     pull_policy: always
     # ... other configuration
 
   sirius-api:
-    image: ghcr.io/purpose168/Sirius-cn-api:${IMAGE_TAG:-latest}
+    image: ghcr.io/siriusscan/sirius-api:${IMAGE_TAG:-latest}
     pull_policy: always
     # ... other configuration
 
   sirius-engine:
-    image: ghcr.io/purpose168/Sirius-cn-engine:${IMAGE_TAG:-latest}
+    image: ghcr.io/siriusscan/sirius-engine:${IMAGE_TAG:-latest}
     pull_policy: always
     # ... other configuration
 ```
@@ -161,7 +161,7 @@ The `docker-compose.dev.yaml` file overrides the registry images with local buil
 1. **Clone repository**:
 
    ```bash
-   git clone https://github.com/purpose168/Sirius-cn.git
+   git clone https://github.com/SiriusScan/Sirius.git
    cd Sirius
    ```
 
@@ -261,8 +261,8 @@ If GitHub Container Registry is unavailable or images fail to pull, you can fall
 **Solutions**:
 
 - Verify internet connectivity: `curl -I https://ghcr.io`
-- Check image exists: Visit `https://github.com/purpose168/Sirius-cn/pkgs/container/sirius-ui`
-- Try pulling manually: `docker pull ghcr.io/purpose168/Sirius-cn-ui:latest`
+- Check image exists: Visit `https://github.com/SiriusScan/Sirius/pkgs/container/sirius-ui`
+- Try pulling manually: `docker pull ghcr.io/siriusscan/sirius-ui:latest`
 - Use fallback build strategy (see above)
 
 ### Wrong Version Deployed

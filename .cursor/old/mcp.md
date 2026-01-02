@@ -8,7 +8,7 @@ alwaysApply: true
 
 ## GitHub MCP
 
-**Repository**: https://github.com/purpose168/Sirius-cn
+**Repository**: https://github.com/SiriusScan/Sirius
 **Owner**: SiriusScan
 **Repository Name**: Sirius
 

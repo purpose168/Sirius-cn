@@ -126,7 +126,7 @@ It's recommended to have reasonably up-to-date versions of these tools.
 1.  **Clone the Main Repository**: Start by cloning the main `Sirius` repository:
 
     ```bash
-    git clone https://github.com/purpose168/Sirius-cn.git
+    git clone https://github.com/SiriusScan/Sirius.git
     cd Sirius
     ```
 
@@ -484,7 +484,7 @@ This workflow outlines how a command typed into the terminal in `sirius-ui` reac
 
 Sirius Scan is an open-source, general-purpose vulnerability scanner designed to leverage community-driven security intelligence. It aims to provide a comprehensive platform for identifying, managing, and remediating security vulnerabilities across an organization's digital assets. The system is built with modularity and extensibility in mind, allowing for continuous enhancement and adaptation to the evolving cybersecurity landscape.
 
-_(Reference: [Sirius Scan GitHub README](https://github.com/purpose168/Sirius-cn/blob/main/README.md))_
+_(Reference: [Sirius Scan GitHub README](https://github.com/SiriusScan/Sirius/blob/main/README.md))_
 
 ### 1.2. High-Level Architecture Overview
 
@@ -1399,7 +1399,7 @@ The management of NSE scripts is a sophisticated process handled by the `app-sca
 - **Centralized Script Storage & Repositories**:
 
   - The primary directory for NSE scripts within the `sirius-engine` Docker container is `/opt/sirius/nse/`. This path is configured during the `sirius-engine` Docker build.
-  - Scripts are organized into repositories (e.g., `sirius-nse` cloned from `https://github.com/purpose168/Sirius-cn-nse.git`). Each repository can contain multiple Lua scripts and has its own manifest file.
+  - Scripts are organized into repositories (e.g., `sirius-nse` cloned from `https://github.com/SiriusScan/sirius-nse.git`). Each repository can contain multiple Lua scripts and has its own manifest file.
 
 - **Manifest System for Script Definition & Discovery**:
 
@@ -1829,7 +1829,7 @@ tRPC provides a clean, type-safe, and efficient communication layer that is inte
 
 ### 6.3. RESTful APIs (`sirius-api`)
 
-The `sirius-api` service ([`Sirius/sirius-api`](https://github.com/purpose168/Sirius-cn/tree/main/sirius-api)) functions as the primary backend API gateway for core data operations and business logic that is not directly handled by the UI's BFF or the specialized `sirius-engine`. It provides a set of RESTful HTTP endpoints for creating, reading, updating, and deleting (CRUD) key data entities like hosts, vulnerabilities, scan results, and potentially user management if centralized here.
+The `sirius-api` service ([`Sirius/sirius-api`](https://github.com/SiriusScan/Sirius/tree/main/sirius-api)) functions as the primary backend API gateway for core data operations and business logic that is not directly handled by the UI's BFF or the specialized `sirius-engine`. It provides a set of RESTful HTTP endpoints for creating, reading, updating, and deleting (CRUD) key data entities like hosts, vulnerabilities, scan results, and potentially user management if centralized here.
 
 **Key Roles & Characteristics**:
 
@@ -1862,7 +1862,7 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/purpose168/Sirius-cn/go-api/sirius/host" // Assuming go-api is accessible
+	"github.com/SiriusScan/Sirius/go-api/sirius/host" // Assuming go-api is accessible
 	// ... other imports
 )
 

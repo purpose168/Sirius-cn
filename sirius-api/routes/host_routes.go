@@ -5,7 +5,7 @@ package routes
 // GetAllHosts handles the GET /host route
 
 import (
-	"github.com/purpose168/Sirius-cn-api/handlers"
+	"github.com/SiriusScan/sirius-api/handlers"
 	"github.com/gofiber/fiber/v2"
 )
 
